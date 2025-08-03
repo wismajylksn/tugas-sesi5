@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Daftar Produk</title>
+  <style>
+    .produk {
+      border: 1px solid #ddd;
+      padding: 10px;
+      margin: 10px;
+      width: 200px;
+      display: inline-block;
+      vertical-align: top;
+      text-align: center;
+    }
+    img {
+      width: 100%;
+      height: 120px;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Daftar Produk</h2>
+
+  <label for="filter">Filter Kategori: </label>
+  <select id="filter" onchange="tampilkanProduk()">
+    <option value="semua">Semua</option>
+    <option value="elektronik">Elektronik</option>
+    <option value="pakaian">Pakaian</option>
+  </select>
+
+  <div id="produkContainer"></div>
+
+  <script>
+    const produk = [
+      {
+        nama: "Smartphone",
+        harga: "Rp 3.000.000",
+        deskripsi: "HP canggih dengan kamera 64MP",
+        gambar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTXrmbEEUOzvUm5sSXoEL0gjmTUutwQSDqKpg&s",
+        kategori: "elektronik"
+      },
+      {
+        nama: "Laptop",
+        harga: "Rp 8.000.000",
+        deskripsi: "Laptop untuk kerja dan gaming",
+        gambar: "https://www.cnet.com/a/img/resize/bb8a2aa9c31f8ec08d82228a51eabf05f00e54d2/hub/2025/03/10/d190e21d-9634-440d-8f33-396c8cb3da6a/m4-macbook-air-15-11.jpg?auto=webp&height=500",
+        kategori: "elektronik"
+      },
+      {
+        nama: "Kaos Polos",
+        harga: "Rp 50.000",
+        deskripsi: "Kaos nyaman untuk sehari-hari",
+        gambar: "https://images.tokopedia.net/img/cache/500-square/VqbcmM/2023/8/24/8ae33287-cd0a-4c78-8808-89cd3a47ade0.jpg",
+        kategori: "pakaian"
+      },
+      {
+        nama: "Jaket Hoodie",
+        harga: "Rp 150.000",
+        deskripsi: "Hangat dan stylish",
+        gambar: "https://static.desty.app/desty-omni/20231119/71f8a092ad5c465fa9d614dcf913627f.png?x-oss-process=image/format,webp",
+        kategori: "pakaian"
+      }
+    ];
+
+    function tampilkanProduk() {
+      const filter = document.getElementById("filter").value;
+      const container = document.getElementById("produkContainer");
+      container.innerHTML = "";
+
+      const hasilFilter = filter === "semua"
+        ? produk
+        : produk.filter(p => p.kategori === filter);
+
+      hasilFilter.forEach(p => {
+        container.innerHTML += `
+          <div class="produk">
+            <img src="${p.gambar}" alt="${p.nama}">
+            <h3>${p.nama}</h3>
+            <p>${p.harga}</p>
+            <p>${p.deskripsi}</p>
+          </div>
+        `;
+      });
+    }
+
+    // Panggil saat pertama kali halaman dimuat
+    tampilkanProduk();
+  </script>
+
+</body>
+</html>
